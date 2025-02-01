@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@org/libs": ["libs/src/index.ts"],
+      "@org/nestjs-typeorm-transactional": [
+        "libs/nestjs-typeorm-transactional/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
