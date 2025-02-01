@@ -60,5 +60,5 @@ Using transactions can significantly reduce the risk of data corruption and make
         }
     }
     ```
-    [!IMPORTANT]  
-    Make sure that the `NestJSTypeormTransactionalModule` is available within the scope of the functions annoated with the `Transactional()` decorator
+    > [!IMPORTANT]  
+    > Make sure that the `NestJSTypeormTransactionalModule` is available within the scope of the functions annoated with the `Transactional()` decorator
