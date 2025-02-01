@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Equal, Repository } from "typeorm";
 import { LogEntity } from "./log.entity";
+import { Transactional } from "@org/nestjs-typeorm-transactional";
 
 @Injectable()
 export class LogRepositoryService {

@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntitiesModule } from './entities/entities.module';
 
+import { NestjsTypeormTransactionalModule } from '@org/nestjs-typeorm-transactional';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -12,7 +14,8 @@ import { EntitiesModule } from './entities/entities.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    EntitiesModule
+    EntitiesModule,
+    NestjsTypeormTransactionalModule
   ],
   controllers: [AppController],
   providers: [AppService],
