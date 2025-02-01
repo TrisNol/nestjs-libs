@@ -6,4 +6,4 @@ import { TransactionManager } from './transaction-manager/transaction-manager.se
   providers: [TransactionManager],
   exports: [TransactionManager],
 })
-export class NestjsTypeormTransactionalModule {}
+export class NestJSTypeormTransactionalModule {}

@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntitiesModule } from './entities/entities.module';
 
-import { NestjsTypeormTransactionalModule } from '@org/nestjs-typeorm-transactional';
+import { NestJSTypeormTransactionalModule } from '@org/nestjs-typeorm-transactional';
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import { NestjsTypeormTransactionalModule } from '@org/nestjs-typeorm-transactio
       synchronize: true,
     }),
     EntitiesModule,
-    NestjsTypeormTransactionalModule
+    NestJSTypeormTransactionalModule
   ],
   controllers: [AppController],
   providers: [AppService],

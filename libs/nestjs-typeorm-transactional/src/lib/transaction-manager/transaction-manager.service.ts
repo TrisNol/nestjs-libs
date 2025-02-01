@@ -9,23 +9,24 @@ export class TransactionManager implements OnModuleInit {
     constructor(private readonly dataSource: DataSource) { }
 
     onModuleInit() {
-        // Ensure async storage is ready to use
         this.asyncLocalStorage = new AsyncLocalStorage<QueryRunner>();
     }
 
     /**
      * Executes the given function within a transaction context.
      * @param fn The function to execute within the transaction.
+     * @returns The result of the function.
+     * @throws If the function throws an error, the transaction will be rolled back and the error rethrown.
      */
     async runInTransaction<T>(fn: (queryRunner: QueryRunner) => Promise<T>): Promise<T> {
         const existingQueryRunner = this.asyncLocalStorage.getStore();
 
-        // If there's an existing query runner, use it for nesting
+        // Check if a queryRunner has already been created for this context to allow for nesting
         if (existingQueryRunner) {
             return fn(existingQueryRunner);
         }
 
-        // Otherwise, create a new transaction
+        // Create a new queryRunner for this context
         const queryRunner = this.dataSource.createQueryRunner();
         await queryRunner.connect();
         await queryRunner.startTransaction();
