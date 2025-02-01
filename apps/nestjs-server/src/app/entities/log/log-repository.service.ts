@@ -1,16 +1,14 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Equal, Repository } from "typeorm";
-import { LogEntity } from "./log.entity";
-import { Transactional } from "@org/nestjs-typeorm-transactional";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Equal, Repository } from 'typeorm';
+import { LogEntity } from './log.entity';
 
 @Injectable()
 export class LogRepositoryService {
     constructor(
         @InjectRepository(LogEntity)
         private readonly logRepository: Repository<LogEntity>
-    ) {
-    }
+    ) { }
 
     async findAll(): Promise<LogEntity[]> {
         return this.logRepository.find();

@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Equal, Repository } from "typeorm";
 import { DeviceEntity } from "./device.entity";
-import { Transactional } from "@org/nestjs-typeorm-transactional";
 
 @Injectable()
 export class DeviceRepositoryService {

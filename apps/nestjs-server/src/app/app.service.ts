@@ -21,7 +21,7 @@ export class AppService {
     return this.deviceRepo.findAll();
   }
 
-  async test(numOfLogs: number = 42) {
+  async test(numOfLogs = 42) {
     const device = await this.deviceRepo.create({
       id: undefined,
       serialNumber: v4(),
@@ -51,7 +51,7 @@ export class AppService {
     });
     Logger.log(`Created device with serial number ${device.serialNumber} & id ${device.id}`);
     for (let i = 0; i < 69; i++) {
-      const log = await this.logRepo.create({
+      await this.logRepo.create({
         id: undefined,
         deviceId: device.id,
         device: device,
