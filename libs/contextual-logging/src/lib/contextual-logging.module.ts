@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ContextLoggingService } from './context-logging-service/context-logging.service';
 
 import { AsyncContextMiddleware } from './async-context-middleware/async-context.middleware';
-import { AsyncContext } from './async-context-middleware/async-context'
+import { AsyncContext } from './async-context/async-context'
 
 @Module({
   controllers: [],

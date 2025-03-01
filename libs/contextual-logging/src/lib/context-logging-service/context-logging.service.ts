@@ -1,6 +1,6 @@
 import { ConsoleLogger, Injectable, NotImplementedException } from "@nestjs/common";
 
-import { AsyncContext } from "../async-context-middleware/async-context";
+import { AsyncContext } from "../async-context/async-context";
 
 @Injectable()
 export class ContextLoggingService extends ConsoleLogger {

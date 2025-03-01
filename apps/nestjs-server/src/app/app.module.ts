@@ -6,6 +6,7 @@ import { EntitiesModule } from './entities/entities.module';
 
 import { NestJSTypeormTransactionalModule } from '@org/nestjs-typeorm-transactional';
 import { ContextualLoggingModule } from '@org/contextual-logging'
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ContextualLoggingModule } from '@org/contextual-logging'
       autoLoadEntities: true,
       synchronize: true,
     }),
+    EventEmitterModule.forRoot(),
     EntitiesModule,
     NestJSTypeormTransactionalModule,
     ContextualLoggingModule

@@ -2,10 +2,15 @@ import { Controller, Get, Logger } from '@nestjs/common';
 import { AppService } from './app.service';
 
 import { v4 } from 'uuid';
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { AsyncContextual } from '@org/contextual-logging';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly eventEmitter: EventEmitter2
+  ) {}
 
   @Get()
   getData() {
@@ -21,6 +26,7 @@ export class AppController {
 
   @Get("test/faulty")
   async getFaulty() {
+    this.eventEmitter.emit("test", "test");
     Logger.debug("@Get() getFaulty() called", AppController.name);
     const myID = v4();
     try {
@@ -39,5 +45,12 @@ export class AppController {
         return "Rollback successful";
       }
     }
+  }
+
+  @OnEvent("test")
+  @AsyncContextual()
+  onTest(data: string) {
+    Logger.warn("@OnEvent() onTest() called", AppController.name);
+    Logger.warn(data);
   }
 }
