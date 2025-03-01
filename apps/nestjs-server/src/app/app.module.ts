@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntitiesModule } from './entities/entities.module';
 
 import { NestJSTypeormTransactionalModule } from '@org/nestjs-typeorm-transactional';
+import { ContextualLoggingModule } from '@org/contextual-logging'
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { NestJSTypeormTransactionalModule } from '@org/nestjs-typeorm-transactio
       synchronize: true,
     }),
     EntitiesModule,
-    NestJSTypeormTransactionalModule
+    NestJSTypeormTransactionalModule,
+    ContextualLoggingModule
   ],
   controllers: [AppController],
   providers: [AppService],

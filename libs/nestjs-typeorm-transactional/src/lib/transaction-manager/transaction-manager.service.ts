@@ -3,14 +3,16 @@ import { AsyncLocalStorage } from 'async_hooks';
 import { DataSource } from 'typeorm';
 import { QueryRunner } from 'typeorm';
 
+import { v4 as uuid } from 'uuid';
+
 @Injectable()
 export class TransactionManager implements OnModuleInit {
-  private asyncLocalStorage: AsyncLocalStorage<QueryRunner> = new AsyncLocalStorage<QueryRunner>();
+  private asyncLocalStorage: AsyncLocalStorage<{ queryRunner: QueryRunner, id: string }> = new AsyncLocalStorage<{ queryRunner: QueryRunner, id: string }>();
 
-  constructor(private readonly dataSource: DataSource) {}
+  constructor(private readonly dataSource: DataSource) { }
 
   onModuleInit() {
-    this.asyncLocalStorage = new AsyncLocalStorage<QueryRunner>();
+    this.asyncLocalStorage = new AsyncLocalStorage<{ queryRunner: QueryRunner, id: string }>();
   }
 
   /**
@@ -26,7 +28,9 @@ export class TransactionManager implements OnModuleInit {
 
     // Check if a queryRunner has already been created for this context to allow for nesting
     if (existingQueryRunner) {
-      return fn(existingQueryRunner);
+      console.log(existingQueryRunner.id);
+      console.log("There's an existing queryRunner");
+      return fn(existingQueryRunner.queryRunner);
     }
 
     // Create a new queryRunner for this context
@@ -34,7 +38,9 @@ export class TransactionManager implements OnModuleInit {
     await queryRunner.connect();
     await queryRunner.startTransaction();
 
-    this.asyncLocalStorage.enterWith(queryRunner);
+    const id = uuid();
+    console.log(id);
+    this.asyncLocalStorage.enterWith({queryRunner: queryRunner, id: id});
 
     try {
       const result = await fn(queryRunner);

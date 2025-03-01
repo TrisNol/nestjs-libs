@@ -5,6 +5,7 @@ import { LogRepositoryService } from './entities/log/log-repository.service';
 import { Transactional } from '@org/nestjs-typeorm-transactional';
 
 import { v4 } from 'uuid';
+import { setTimeout } from 'timers/promises';
 
 @Injectable()
 export class AppService {
@@ -44,6 +45,7 @@ export class AppService {
 
   @Transactional()
   async faulty(id: string) {
+    await setTimeout(7500);
     const device = await this.deviceRepo.create({
       id: id,
       serialNumber: v4(),
