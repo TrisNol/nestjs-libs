@@ -2,8 +2,7 @@
 
 This library provides the means perform contextual logging by passing a [Correlation ID](https://microsoft.github.io/code-with-engineering-playbook/observability/correlation-id/) down the async. callstack within a NestJS app.
 
-By utilizing this mechanism it's possible to track the flow of logs by the means of the `correlationID` and `timestamp` of a log, which becomes increasingly helpful in asyncronous applications where multiple requests/events are handled in parallel. 
-
+By utilizing this mechanism it's possible to track the flow of logs by the means of the `correlationID` and `timestamp` of a log, which becomes increasingly helpful in asynchronous applications where multiple requests/events are handled in parallel.
 ## Usage
 
 1. Install the lib.
