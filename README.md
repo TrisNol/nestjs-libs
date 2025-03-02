@@ -4,6 +4,7 @@ Within this repository you can find some utility libs for [NestJS](https://docs.
 
 - AsyncLocalStorage based
     - [nestjs-typeorm-transactional](./libs/nestjs-typeorm-transactional/README.md)
+    - [contextual-logging](./libs/contextual-logging/README.md)
 
 
 ## Run tasks
