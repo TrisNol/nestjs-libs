@@ -1,0 +1,33 @@
+{
+  "name": "buffered-mqtt-adapter",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/buffered-mqtt-adapter/src",
+  "projectType": "library",
+  "release": {
+    "version": {
+      "generatorOptions": {
+        "packageRoot": "dist/{projectRoot}",
+        "currentVersionResolver": "git-tag"
+      }
+    }
+  },
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/buffered-mqtt-adapter",
+        "tsConfig": "libs/buffered-mqtt-adapter/tsconfig.lib.json",
+        "packageJson": "libs/buffered-mqtt-adapter/package.json",
+        "main": "libs/buffered-mqtt-adapter/src/index.ts",
+        "assets": ["libs/buffered-mqtt-adapter/*.md"]
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    }
+  }
+}
