@@ -6,6 +6,7 @@ import { EntitiesModule } from './entities/entities.module';
 
 import { NestJSTypeormTransactionalModule } from '@org/nestjs-typeorm-transactional';
 import { ContextualLoggingModule } from '@org/contextual-logging'
+import { MQTTService, InMemoryBufferStorage } from '@org/buffered-mqtt-adapter';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
@@ -22,6 +23,13 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     ContextualLoggingModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: "BUFFER_STORAGE",
+      useClass: InMemoryBufferStorage
+    },
+    AppService,
+    MQTTService
+  ],
 })
-export class AppModule {}
+export class AppModule { }

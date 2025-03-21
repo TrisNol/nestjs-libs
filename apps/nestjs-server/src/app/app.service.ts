@@ -1,18 +1,24 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 
 import { DeviceRepositoryService } from './entities/device/device-repository.service';
 import { LogRepositoryService } from './entities/log/log-repository.service';
 import { Transactional } from '@org/nestjs-typeorm-transactional';
+import { MQTTService } from '@org/buffered-mqtt-adapter';
 
 import { v4 } from 'uuid';
 import { setTimeout } from 'timers/promises';
 
 @Injectable()
-export class AppService {
+export class AppService implements OnModuleInit {
   constructor(
     private readonly deviceRepo: DeviceRepositoryService,
-    private readonly logRepo: LogRepositoryService
+    private readonly logRepo: LogRepositoryService,
+    private readonly mqttService: MQTTService
   ) { }
+  
+  onModuleInit() {
+    this.mqttService.init()
+  }
 
   getById(id: string) {
     return this.deviceRepo.findById(id);
