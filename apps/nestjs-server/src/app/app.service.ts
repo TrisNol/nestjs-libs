@@ -10,14 +10,21 @@ import { setTimeout } from 'timers/promises';
 
 @Injectable()
 export class AppService implements OnModuleInit {
+  private counter = 0;
+
   constructor(
     private readonly deviceRepo: DeviceRepositoryService,
     private readonly logRepo: LogRepositoryService,
     private readonly mqttService: MQTTService
   ) { }
   
-  onModuleInit() {
-    this.mqttService.init()
+  async onModuleInit() {
+    await this.mqttService.init()
+    setInterval(() => {
+      console.log("Counter: ", this.counter);
+      this.mqttService.publish("apps/nestjs-server/counter", String(this.counter), 0, false, true);
+      this.counter++;
+  }, 100)
   }
 
   getById(id: string) {
