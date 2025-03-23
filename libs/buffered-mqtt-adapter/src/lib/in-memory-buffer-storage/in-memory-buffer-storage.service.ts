@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { BufferStorage, StoredMQTTBufer } from "../core/buffer-storage.interface";
+import { BufferStorage, StoredMQTTBuffer } from "../core/buffer-storage.interface";
 import { MQTTBuffer } from "../core/mqtt-buffer.interface";
 
 import {v4 as uuid_v4} from 'uuid';
@@ -10,9 +10,9 @@ import {v4 as uuid_v4} from 'uuid';
  */
 @Injectable()
 export class InMemoryBufferStorage implements BufferStorage {
-    private readonly buffers: { [topic: string]: StoredMQTTBufer[] } = {};
+    private readonly buffers: { [topic: string]: StoredMQTTBuffer[] } = {};
 
-    set(buffer: MQTTBuffer): StoredMQTTBufer {
+    set(buffer: MQTTBuffer): StoredMQTTBuffer {
         if (!this.buffers[buffer.topic]) {
             this.buffers[buffer.topic] = [];
         }
@@ -21,7 +21,7 @@ export class InMemoryBufferStorage implements BufferStorage {
         return bufferToStore;
     }
 
-    add(buffer: MQTTBuffer): StoredMQTTBufer  {
+    add(buffer: MQTTBuffer): StoredMQTTBuffer  {
         if (!this.buffers[buffer.topic]) {
             this.buffers[buffer.topic] = [];
         }
@@ -30,11 +30,11 @@ export class InMemoryBufferStorage implements BufferStorage {
         return bufferToStore;
     }
 
-    getAll(): StoredMQTTBufer[] {
+    getAll(): StoredMQTTBuffer[] {
         return Object.values(this.buffers).reduce((acc, val) => acc.concat(val), []);
     }
 
-    getByTopic(topic: string): StoredMQTTBufer[] {
+    getByTopic(topic: string): StoredMQTTBuffer[] {
         return this.buffers[topic] || [];
     }
 

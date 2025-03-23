@@ -8,7 +8,7 @@ import { BUFFER_STORAGE, MQTT_CONNECT_OPTIONS } from "./core/constants";
 export class MQTTService {
 
     protected client: MqttClient | null = null;
-    private isConnectected = false;
+    private isConnected = false;
 
     constructor(
         @Inject(BUFFER_STORAGE) private readonly bufferService: BufferStorage,
@@ -27,7 +27,7 @@ export class MQTTService {
 
     protected async onConnect() {
         console.log("Connected to MQTT broker");
-        this.isConnectected = true;
+        this.isConnected = true;
         const buffers = await this.bufferService.getAll();
         for (const buffer of buffers) {
             console.debug("Sending out buffered message with id ", buffer.id);
@@ -38,11 +38,11 @@ export class MQTTService {
     }
     protected onDisconnect() {
         console.log("Disconnected from MQTT broker");
-        this.isConnectected = false;
+        this.isConnected = false;
     }
 
     public async publish(topic: string, message: string, qos: 0 | 1 | 2 = 0, retain = false, stackBuffer = false): Promise<void> {
-        if (this.isConnectected) {
+        if (this.isConnected) {
             this.client!.publish(topic, message);
             return;
         }
