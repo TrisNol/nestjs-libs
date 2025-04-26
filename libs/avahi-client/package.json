@@ -1,0 +1,11 @@
+{
+  "name": "@org/avahi-client",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "dependencies": {
+    "@nestjs/common": "^11.0.12",
+    "tslib": "^2.3.0"
+  }
+}
