@@ -20,11 +20,11 @@ export class AppService implements OnModuleInit {
   
   async onModuleInit() {
     await this.mqttService.init()
-    setInterval(() => {
-      console.log("Counter: ", this.counter);
-      this.mqttService.publish("apps/nestjs-server/counter", String(this.counter), 0, false, true);
-      this.counter++;
-  }, 100)
+  //   setInterval(() => {
+  //     console.log("Counter: ", this.counter);
+  //     this.mqttService.publish("apps/nestjs-server/counter", String(this.counter), 0, false, true);
+  //     this.counter++;
+  // }, 100)
   }
 
   getById(id: string) {

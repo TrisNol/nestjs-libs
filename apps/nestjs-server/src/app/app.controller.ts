@@ -4,13 +4,15 @@ import { AppService } from './app.service';
 import { v4 } from 'uuid';
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
 import { AsyncContextual } from '@org/contextual-logging';
+import { AvahiClientService } from '@org/avahi-client';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly eventEmitter: EventEmitter2,
-  ) {}
+    private readonly avahiClient: AvahiClientService
+  ) { }
 
   @Get()
   getData() {
@@ -45,6 +47,20 @@ export class AppController {
         return "Rollback successful";
       }
     }
+  }
+
+  @Get("test/avahi")
+  async getAvahi() {
+    Logger.debug("@Get() getAvahi() called", AppController.name);
+    await this.avahiClient.scan();
+    return "Avahi scan started";
+  }
+
+  @Get("test/avahi/respond")
+  async getAvahiRespond() {
+    Logger.debug("@Get() getAvahiRespond() called", AppController.name);
+    await this.avahiClient.respond();
+    return "Avahi respond started";
   }
 
   @OnEvent("test")

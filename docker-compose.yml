@@ -1,0 +1,5 @@
+services:
+  avahi-example:
+    image: flungo/avahi:dev
+    container_name: avahi-example
+    network_mode: host

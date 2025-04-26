@@ -8,6 +8,7 @@ import { NestJSTypeormTransactionalModule } from '@org/nestjs-typeorm-transactio
 import { ContextualLoggingModule } from '@org/contextual-logging'
 import { InMemoryBufferStorage, BufferedMqttAdapterModule } from '@org/buffered-mqtt-adapter';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { AvahiClientModule } from '@org/avahi-client';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     EventEmitterModule.forRoot(),
     EntitiesModule,
     NestJSTypeormTransactionalModule,
-    ContextualLoggingModule
+    ContextualLoggingModule,
+    AvahiClientModule
   ],
   controllers: [AppController],
   providers: [
