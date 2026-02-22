@@ -17,6 +17,7 @@
     "paths": {
       "@org/buffered-mqtt-adapter": ["libs/buffered-mqtt-adapter/src/index.ts"],
       "@org/contextual-logging": ["libs/contextual-logging/src/index.ts"],
+      "@org/gql-live-query": ["libs/gql-live-query/src/index.ts"],
       "@org/libs": ["libs/src/index.ts"],
       "@org/nestjs-typeorm-transactional": [
         "libs/nestjs-typeorm-transactional/src/index.ts"

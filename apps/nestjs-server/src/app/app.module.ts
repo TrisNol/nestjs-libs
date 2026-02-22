@@ -18,13 +18,13 @@ import { GraphqlModule } from './graphql/graphql.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    // BufferedMqttAdapterModule.forRoot(
-    //   {
-    //     url: "mqtt://trisnol.tech:1883",
-    //     clientId: "nestjs-server"
-    //   }, 
-    //   new InMemoryBufferStorage()
-    // ),
+    BufferedMqttAdapterModule.forRoot(
+      {
+        url: "mqtt://host.docker.internal:1883",
+        clientId: "nestjs-server"
+      },
+      new InMemoryBufferStorage()
+    ),
     EventEmitterModule.forRoot(),
     EntitiesModule,
     NestJSTypeormTransactionalModule,

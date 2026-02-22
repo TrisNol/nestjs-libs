@@ -1,0 +1,9 @@
+{
+  "name": "gql-live-query",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/gql-live-query/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project gql-live-query --web",
+  "targets": {}
+}

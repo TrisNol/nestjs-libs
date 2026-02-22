@@ -1,7 +1,7 @@
 {
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "devcontainer",
+    "workspaceFolder": "/workspaces/nestjs-libs",
     "customizations": {
         "vscode": {
             "settings": {
@@ -11,16 +11,10 @@
     },
     "forwardPorts": [
         3000,
-        4200
-    ],
-    "mounts": [
-        "source=//var/run/docker.sock,target=/var/run/docker-host.sock,type=bind",
-        "source=${localWorkspaceFolderBasename}-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
-    ],
-    "runArgs": [
-        "--privileged",
-        "--network=host",
-        "--add-host=host.docker.internal:host-gateway"
+        4200,
+        1883,
+        6379,
+        5540
     ],
     "remoteUser": "root",
     "postStartCommand": "service docker start"

@@ -1,0 +1,51 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+      - /var/run/docker.sock:/var/run/docker-host.sock
+      - nestjs-libs-node_modules:/workspaces/nestjs-libs/node_modules
+    network_mode: host
+    privileged: true
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    restart: unless-stopped
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+
+  redisinsight:
+    image: redis/redisinsight:3.0.3
+    ports:
+      - "5540:5540"
+    volumes:
+      - redisinsight-data:/data
+    restart: unless-stopped
+    depends_on:
+      - redis
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  nestjs-libs-node_modules:
+  redis-data:
+  redisinsight-data:
