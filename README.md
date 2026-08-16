@@ -6,6 +6,8 @@ Within this repository you can find some utility libs for [NestJS](https://docs.
     - [nestjs-typeorm-transactional](./libs/nestjs-typeorm-transactional/README.md)
     - [contextual-logging](./libs/contextual-logging/README.md)
     - [buffered-mqtt-adapter](./libs/buffered-mqtt-adapter/README.md)
+- GraphQL extension
+    - [gql-live-query](./libs/gql-live-query/README.md)
 
 
 ## Run tasks

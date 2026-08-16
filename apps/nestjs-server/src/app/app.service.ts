@@ -15,16 +15,17 @@ export class AppService implements OnModuleInit {
   constructor(
     private readonly deviceRepo: DeviceRepositoryService,
     private readonly logRepo: LogRepositoryService,
-    private readonly mqttService: MQTTService
+    // private readonly mqttService: MQTTService
   ) { }
   
   async onModuleInit() {
-    await this.mqttService.init()
-    setInterval(() => {
-      console.log("Counter: ", this.counter);
-      this.mqttService.publish("apps/nestjs-server/counter", String(this.counter), 0, false, true);
-      this.counter++;
-  }, 100)
+  //   await this.mqttService.init()
+  //   setInterval(() => {
+  //     console.log("Counter: ", this.counter);
+  //     this.mqttService.publish("apps/nestjs-server/counter", String(this.counter), 0, false, true);
+  //     this.counter++;
+  // }, 100)
+  // }
   }
 
   getById(id: string) {

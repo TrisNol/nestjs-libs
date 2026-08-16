@@ -8,6 +8,7 @@ import { NestJSTypeormTransactionalModule } from '@org/nestjs-typeorm-transactio
 import { ContextualLoggingModule } from '@org/contextual-logging'
 import { InMemoryBufferStorage, BufferedMqttAdapterModule } from '@org/buffered-mqtt-adapter';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { GraphqlModule } from './graphql/graphql.module';
 
 @Module({
   imports: [
@@ -19,15 +20,16 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     }),
     BufferedMqttAdapterModule.forRoot(
       {
-        url: "mqtt://trisnol.tech:1883",
+        url: "mqtt://host.docker.internal:1883",
         clientId: "nestjs-server"
-      }, 
+      },
       new InMemoryBufferStorage()
     ),
     EventEmitterModule.forRoot(),
     EntitiesModule,
     NestJSTypeormTransactionalModule,
-    ContextualLoggingModule
+    ContextualLoggingModule,
+    GraphqlModule
   ],
   controllers: [AppController],
   providers: [
