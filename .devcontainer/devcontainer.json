@@ -9,6 +9,11 @@
             }
         }
     },
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "moby": "false"
+        }
+    },
     "forwardPorts": [
         3000,
         4200,
@@ -16,6 +21,5 @@
         6379,
         5540
     ],
-    "remoteUser": "root",
-    "postStartCommand": "service docker start"
+    "remoteUser": "vscode"
 }
