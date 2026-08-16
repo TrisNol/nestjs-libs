@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs && apt-get clean
 
-RUN mkdir -p /workspaces/nestjs-libs/node_modules && \
-    chown -R vscode:vscode /workspaces/nestjs-libs
+RUN mkdir -p /workspaces/nestjs-libs && \
+    chown vscode:vscode /workspaces/nestjs-libs
 
 USER vscode
 WORKDIR /workspaces/nestjs-libs
