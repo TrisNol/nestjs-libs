@@ -3,12 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntitiesModule } from './entities/entities.module';
+import { McpServerModule } from '@org/mcp-server';
 
 import { NestJSTypeormTransactionalModule } from '@org/nestjs-typeorm-transactional';
 import { ContextualLoggingModule } from '@org/contextual-logging'
 import { InMemoryBufferStorage, BufferedMqttAdapterModule } from '@org/buffered-mqtt-adapter';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { GraphqlModule } from './graphql/graphql.module';
+import { AnotherTool, HeresyTool } from './mcp-example.service';
 
 @Module({
   imports: [
@@ -29,11 +31,14 @@ import { GraphqlModule } from './graphql/graphql.module';
     EntitiesModule,
     NestJSTypeormTransactionalModule,
     ContextualLoggingModule,
-    GraphqlModule
+    GraphqlModule,
+    McpServerModule
   ],
   controllers: [AppController],
   providers: [
     AppService,
+    HeresyTool,
+    AnotherTool
   ],
 })
 export class AppModule { }

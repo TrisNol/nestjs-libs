@@ -12,11 +12,11 @@ export class TmpDataService {
     private data = "Initial data";
 
     constructor(private readonly liveQueryStore: RedisLiveQueryStore) {
-        setInterval(() => {
-            const data = `Updated data at ${new Date().toISOString()}`;
-            this.updateData(data);
-            Logger.log(`Data updated: ${data}`);
-        }, 5000);
+        // setInterval(() => {
+        //     const data = `Updated data at ${new Date().toISOString()}`;
+        //     this.updateData(data);
+        //     Logger.log(`Data updated: ${data}`);
+        // }, 5000);
     }
 
     getData(): string {
