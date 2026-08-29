@@ -23,7 +23,22 @@ export class AppModule {}
 ```
 
 Decorate injectable providers with `@McpToolProvider()` and their methods with
-`@McpTool()` to expose them as MCP tools. The module serves MCP requests at
+`@McpTool()` to expose them as MCP tools:
+```typescript
+import { Injectable } from "@nestjs/common";
+import { McpTool, McpToolProvider } from "@org/mcp-server";
+
+@Injectable()
+@McpToolProvider()
+export class SomeMCPMagics{
+	@McpTool("heresy", "Heresy detected")
+    async heresy(input: { text: string }) {
+        return { content: [{ type: 'text', text: `Saved: ${input.text}` }] };
+    }
+}
+```
+
+The module serves MCP requests at
 `/mcp`.
 
 ## Running unit tests
