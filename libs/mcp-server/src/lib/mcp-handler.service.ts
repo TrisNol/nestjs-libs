@@ -1,19 +1,29 @@
 import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
 import { createMcpHandler, McpServer, McpHttpHandler } from '@modelcontextprotocol/server';
-import * as z from 'zod/v4';
 import { toNodeHandler } from "@modelcontextprotocol/node";
 import type { Request, Response } from "express";
 import { DiscoveryService } from "@nestjs/core";
-import { MCP_TOOL_KEY, McpTool, McpToolProvider } from "./mcp-tool.decorator";
+import { MCP_TOOL_KEY, McpToolProvider } from "./mcp-tool.decorator";
 
 @Injectable()
 export class MCPHandler implements OnModuleInit {
     private readonly logger = new Logger(MCPHandler.name);
     private handler: McpHttpHandler = null as any;
 
-    constructor(
-        private readonly discoveryService: DiscoveryService
+
+    private constructor(
+        private readonly discoveryService: DiscoveryService,
+        private readonly serverSettings: { name: string, version: string, description: string, websiteUrl: string }
     ) { }
+
+    static createMcpHandler(discoveryService: DiscoveryService, name: string, version: string, description: string, websiteUrl: string): MCPHandler {
+        return new MCPHandler(
+            discoveryService,
+            { name, version, description, websiteUrl }
+        );
+
+    }
+
     onModuleInit() {
         const globalTools: { name: string, description: string, inputSchema: any, method: Function }[] = [];
         // Tools must be services --> get providers
@@ -41,9 +51,13 @@ export class MCPHandler implements OnModuleInit {
                 }
             });
         });
+        this.logger.log(`Creating MCP Server with name: ${this.serverSettings.name}, version: ${this.serverSettings.version}, description: ${this.serverSettings.description}, websiteUrl: ${this.serverSettings.websiteUrl}`);
         const handler = createMcpHandler(() => {
             const server = new McpServer({
-                name: 'MCP Server', version: '1.0.0', description: 'A server for the Model Context Protocol', websiteUrl: 'localhost:3000'
+                name: this.serverSettings.name,
+                version: this.serverSettings.version,
+                description: this.serverSettings.description,
+                websiteUrl: this.serverSettings.websiteUrl
             });
             for (const tool of globalTools) {
                 server.registerTool(tool.name, {

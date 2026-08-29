@@ -32,7 +32,12 @@ import { AnotherTool, HeresyTool } from './mcp-example.service';
     NestJSTypeormTransactionalModule,
     ContextualLoggingModule,
     GraphqlModule,
-    McpServerModule
+    McpServerModule.forRoot({
+      name: 'Mock Server',
+      version: '420.666.69',
+      description: 'A server for the Model Context Protocol',
+      websiteUrl: 'http://localhost:3000',
+    }),
   ],
   controllers: [AppController],
   providers: [
