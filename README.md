@@ -8,6 +8,8 @@ Within this repository you can find some utility libs for [NestJS](https://docs.
     - [buffered-mqtt-adapter](./libs/buffered-mqtt-adapter/README.md)
 - GraphQL extension
     - [gql-live-query](./libs/gql-live-query/README.md)
+- Others
+    - [mcp-server](./libs/mcp-server/README.md)
 
 
 ## Run tasks
