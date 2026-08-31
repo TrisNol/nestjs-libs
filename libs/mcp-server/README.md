@@ -27,16 +27,25 @@ Decorate injectable providers with `@McpToolProvider()` and their methods with
 ```typescript
 import { Injectable } from "@nestjs/common";
 import { McpTool, McpToolProvider } from "@org/mcp-server";
+import * as z from "zod/v4";
 
 @Injectable()
 @McpToolProvider()
 export class SomeMCPMagics{
-	@McpTool("heresy", "Heresy detected")
+	@McpTool(
+		"heresy",
+		"Heresy detected",
+		z.object({ text: z.string().min(1).max(100) }),
+	)
     async heresy(input: { text: string }) {
         return { content: [{ type: 'text', text: `Saved: ${input.text}` }] };
     }
 }
 ```
+
+Pass a Zod v4 schema as the optional third argument to `@McpTool()`. The schema
+is published as the tool's MCP `inputSchema` and validates tool arguments before
+the decorated method is called.
 
 The module serves MCP requests at
 `/mcp`.
