@@ -1,6 +1,6 @@
 # mcp-server
 
-This library was generated with [Nx](https://nx.dev).
+The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro) has become the golden standard for connecting AI agents to remote systems by creating a generic interface that abstracts away from the specifics of the underlying system hosting the MCP server. This `mcp-server` library provides a way to equip a NestJS service with such an interface to open up one's app to AI agents.
 
 ## Usage
 

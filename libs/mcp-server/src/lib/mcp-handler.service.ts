@@ -25,7 +25,7 @@ export class MCPHandler implements OnModuleInit {
     }
 
     onModuleInit() {
-        const globalTools: { name: string, description: string, inputSchema: any, method: Function }[] = [];
+        const globalTools: { name: string, description: string, inputSchema: any, method: (input: any) => Promise<any> }[] = [];
         // Tools must be services --> get providers
         const decoratedToolProviders = this.discoveryService.getProviders({ metadataKey: McpToolProvider.KEY });
         decoratedToolProviders.forEach(provider => {
