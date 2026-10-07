@@ -9,7 +9,7 @@ import { AsyncContextual } from '@org/contextual-logging';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly eventEmitter: EventEmitter2
+    private readonly eventEmitter: EventEmitter2,
   ) {}
 
   @Get()

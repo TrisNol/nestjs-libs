@@ -1,0 +1,50 @@
+{
+  "name": "docs",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "implicitDependencies": [
+    "buffered-mqtt-adapter",
+    "contextual-logging",
+    "gql-live-query",
+    "mcp-server",
+    "nestjs-typeorm-transactional"
+  ],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "cache": true,
+      "inputs": [
+        "{projectRoot}/**/*",
+        "!{projectRoot}/.vitepress/cache/**/*",
+        "!{projectRoot}/.vitepress/dist/**/*",
+        "{workspaceRoot}/README.md",
+        "{workspaceRoot}/libs/*/README.md",
+        "{workspaceRoot}/LICENSE",
+        "{workspaceRoot}/package.json",
+        "{workspaceRoot}/bun.lockb",
+        { "env": "DOCS_GIT_REF" },
+        { "env": "GITHUB_HEAD_REF" },
+        { "env": "GITHUB_REF_NAME" },
+        { "runtime": "git rev-parse --abbrev-ref HEAD" },
+        { "runtime": "git rev-parse HEAD" }
+      ],
+      "outputs": ["{projectRoot}/.vitepress/dist"],
+      "options": {
+        "command": "vitepress build docs"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vitepress dev docs --host 0.0.0.0"
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "vitepress preview docs --host 0.0.0.0"
+      }
+    }
+  }
+}
